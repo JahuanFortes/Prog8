@@ -24,10 +24,10 @@ const model = new ChatOpenAI({
 
 // #region PromptENGINE
 // EXPLAIN THIS!!!!
-const startMessages = [
+const messages = [
   [
     "system",
-    "You are the best tour guide in the world. You can locate all the fun activities and locations in a city. Answer with one short clear sentence. Don't add a large explanation.",
+    "You are the best tour guide in the world. You can locate all the fun activities and locations in a city. Answer with three clear sentences. Don't add a large explanation. Give more then 3 options",
   ],
   ["ai", "Hello! What location are you interested in?"],
   [
@@ -41,7 +41,7 @@ const startMessages = [
 // #region Get
 app.get("/result", async (req, res) => {
   // EXPLAIN THIS!!!!
-  const result = await model.invoke(startMessages, { max_tokens: 50 });
+  const result = await model.invoke(messages, { max_tokens: 50 });
   res.send(result.content);
 });
 // #endregion
@@ -50,9 +50,9 @@ app.get("/result", async (req, res) => {
 app.post("/chat", async (req, res) => {
   // EXPLAIN THIS!!!!
   const { prompt } = req.body;
-  startMessages.push(["human", prompt]); //history
-  const response = await model.invoke(startMessages);
-  startMessages.push(["ai", response.content]); // history
+  messages.push(["human", prompt]); //history
+  const response = await model.invoke(messages);
+  messages.push(["ai", response.content]); // history
   res.json({ message: response.content });
 });
 // #endregion
