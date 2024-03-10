@@ -13,10 +13,6 @@ makePlanner.addEventListener("click", async function (event) {
 });
 // #endregion Get
 
-//# region API's
-
-//# endregion API's
-
 // #region Post
 const submit = document.getElementById("submit");
 document
@@ -31,20 +27,6 @@ document
     const input = document.getElementById("prompt"); // input of the user
     const prompt = input.value.trim();
 
-    try {
-      const weatherapiResponse = await fetch(
-        `http://api.weatherapi.com/v1/current.json?key=${process.env.WEATHER_API}&q=netherlands
-        `
-      );
-      const weatherAPI = await weatherapiResponse.text();
-      console.log(weatherAPI);
-      console.log(weatherAPI);
-      document.getElementById(
-        "locationResult"
-      ).innerHTML = `<p>${data.message}</p>`;
-    } catch (error) {
-      console.error("error", error);
-    }
     // EXPLAIN THIS!!!!
     try {
       const response = await fetch("http://localhost:4000/chat", {

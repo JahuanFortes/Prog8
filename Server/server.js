@@ -40,11 +40,41 @@ const messages = [
 
 // #region Get
 app.get("/result", async (req, res) => {
+  {
+    const weather = await fetch(
+      `http://api.openweathermap.org/data/2.5/forecast?id=524901&appid=${process.env.WEATHER_API}/rotterdam`
+    );
+    return weather.today.temp;
+  }
+
   // EXPLAIN THIS!!!!
   const result = await model.invoke(messages, { max_tokens: 50 });
-  res.send(result.content);
+  res.send(result.content, weather.content);
 });
 // #endregion
+
+//# region API's
+// app.get getWeather(res,req) {
+
+//   const checkWeather = await getWeather.text() res.send();
+//   return weather.today.temp;
+// }
+
+// try {
+//   const weatherapiResponse = await fetch(
+//     `http://api.weatherapi.com/v1/current.json?key=${process.env.WEATHER_API}&q=netherlands
+//         `
+//   );
+//   const weatherAPI = await weatherapiResponse.text();
+//   console.log(weatherAPI);
+//   console.log(weatherAPI);
+//   document.getElementById(
+//     "locationResult"
+//   ).innerHTML = `<p>${data.message}</p>`;
+// } catch (error) {
+//   console.error("error", error);
+// }
+//# endregion API's
 
 // #region Post
 app.post("/chat", async (req, res) => {
