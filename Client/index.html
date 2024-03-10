@@ -9,7 +9,7 @@
   </head>
 
   <body>
-    <main>
+    <section>
         <button id="makePlanner">Generate planning</button>
         <div id="plannerResult"></div>
         <hr />
@@ -29,6 +29,23 @@
         </form>
         <div id="locationResult"></div>
       </div>
-    </main>
+    </section>
+    <section>
+        <h2>Ask the AI about a Movie:</h2>
+
+        <form id="customMovieForm">
+          <label for="moviePrompt">Enter question:</label>
+          <input
+            type="text"
+            id="moviePrompt"
+            name="moviePrompt"
+            placeholder="your question..."
+            required
+          />
+          <button type="submit" id="movieSubmit">Submit</button>
+        </form>
+        <div id="movieResult"></div>
+      </div>
+    </section>
   </body>
 </html>
