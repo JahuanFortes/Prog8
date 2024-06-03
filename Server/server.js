@@ -58,7 +58,6 @@ app.get("/result", async (req, res) => {
 const anthropic = new Anthropic({
   apiKey: process.env["ANTHROPIC_API_KEY"],
 });
-
 // #endregion
 
 //#region API's
@@ -102,16 +101,6 @@ app.post("/chat", async (req, res) => {
 });
 // #endregion
 
-//#region test
-// app.post("/chat", async (req, res) => {
-//   // EXPLAIN THIS!!!!
-//   const { prompt } = req.body;
-//   messages.push(["human", prompt]); //history
-//   const response = await model.invoke(messages);
-//   messages.push(["ai", response.content]); // history
-//   res.json({ message: response.content });
-// });
-//#endregion test
 // #region Port
 app.listen(port, () => {
   console.log(`port:${port}`);
