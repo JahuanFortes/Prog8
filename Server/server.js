@@ -54,11 +54,15 @@ app.get("/result", async (req, res) => {
 });
 // #endregion
 
-// #region LLM Connection
-const anthropic = new Anthropic({
-  apiKey: process.env["ANTHROPIC_API_KEY"],
+// #region Post
+app.post("/chat", async (req, res) => {
+  // EXPLAIN THIS!!!!
+  const { prompt } = req.body;
+  messages.push(["human", prompt]); //history
+  const response = await model.invoke(messages);
+  messages.push(["ai", response.content]); // history
+  res.json({ message: response.content });
 });
-// test
 // #endregion
 
 //#region API's
@@ -91,14 +95,30 @@ app.post("/movies", async (req, res) => {
 });
 //#endregion API's
 
-// #region Post
-app.post("/chat", async (req, res) => {
-  // EXPLAIN THIS!!!!
-  const { prompt } = req.body;
-  messages.push(["human", prompt]); //history
-  const response = await model.invoke(messages);
-  messages.push(["ai", response.content]); // history
-  res.json({ message: response.content });
+// #region LLM Connection
+const anthropic = new Anthropic({
+  apiKey: process.env["ANTHROPIC_API_KEY"],
+});
+
+const storyMSG = [];
+app.post("/story", async (req, res) => {
+  const { storyPrompt } = req.body;
+  // if (!storyPrompt) {
+  //   res.send({ message: "no story found" });
+  // }
+  storyMSG.push({ role: "user", content: storyPrompt });
+  console.log(storyMSG);
+
+  const msg = await anthropic.messages.create({
+    model: "claude-3-opus-20240229",
+    max_tokens: 100,
+    system:
+      "You are an AI assistant with a passion for creative writing and storytelling. Your task is to collaborate with users to create engaging stories, offering imaginative plot twists and dynamic character development. Encourage the user to contribute their ideas and build upon them to create a captivating narrative.",
+    messages: storyMSG,
+  });
+  console.log(msg);
+  storyMSG.push({ role: "assistant", content: msg.content[0].text });
+  res.json(msg.content[0].text);
 });
 // #endregion
 

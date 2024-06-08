@@ -82,3 +82,38 @@ document
     }
   });
 // #endregion MoviePost
+
+// #region LLM Connection
+const storySubmit = document.getElementById("storySubmit");
+document
+  .getElementById("storyForm")
+  .addEventListener("submit", async function (event) {
+    submit.disabled = true;
+    setTimeout(function () {
+      submit.disabled = false;
+    }, 3500);
+    event.preventDefault();
+
+    const input = document.getElementById("storyPrompt"); // input of the user
+    const storyPrompt = input.value.trim();
+
+    // EXPLAIN THIS!!!!
+    try {
+      const response = await fetch("http://localhost:4000/story", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ storyPrompt }),
+      });
+
+      // EXPLAIN THIS!!!!
+      const data = await response.json();
+      document.getElementById(
+        "storyResult"
+      ).innerHTML = `<p>${data.message}</p>`;
+    } catch (error) {
+      console.error("error", error);
+    }
+  });
+// #endregion
