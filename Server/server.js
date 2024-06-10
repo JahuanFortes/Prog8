@@ -65,7 +65,7 @@ app.post("/chat", async (req, res) => {
 });
 // #endregion
 
-//#region API's
+//#region Movie API Intergration
 const apiKey = process.env.MOVIE_API_KEY;
 let firstTime = true;
 
@@ -93,9 +93,9 @@ app.post("/movies", async (req, res) => {
 
   res.send({ message: result.content });
 });
-//#endregion API's
+//#endregion Movie API Intergration
 
-// #region LLM Connection
+// #region LLM Claude
 const anthropic = new Anthropic({
   apiKey: process.env["ANTHROPIC_API_KEY"],
 });

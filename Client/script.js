@@ -53,9 +53,9 @@ const movieSubmit = document.getElementById("movieSubmit");
 document
   .getElementById("customMovieForm")
   .addEventListener("submit", async function (event) {
-    movieSubmit.disabled = true;
+    submit.disabled = true;
     setTimeout(function () {
-      movieSubmit.disabled = false;
+      submit.disabled = false;
     }, 3500);
     event.preventDefault();
 
@@ -80,17 +80,18 @@ document
     } catch (error) {
       console.error("error", error);
     }
+    console.log(moviePrompt);
   });
 // #endregion MoviePost
 
-// #region LLM Connection
+// #region LLM Claude
 const storySubmit = document.getElementById("storySubmit");
 document
   .getElementById("storyForm")
   .addEventListener("submit", async function (event) {
-    storySubmit.disabled = true;
+    submit.disabled = true;
     setTimeout(function () {
-      storySubmit.disabled = false;
+      submit.disabled = false;
     }, 3500);
     event.preventDefault();
 
@@ -98,6 +99,7 @@ document
     const storyPrompt = input.value.trim();
 
     // EXPLAIN THIS!!!!
+    // here probably problem
     try {
       const response = await fetch("http://localhost:4000/story", {
         method: "POST",
@@ -114,5 +116,6 @@ document
     } catch (error) {
       console.error("error", error);
     }
+    console.log(data.content);
   });
 // #endregion
