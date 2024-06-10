@@ -53,9 +53,9 @@ const movieSubmit = document.getElementById("movieSubmit");
 document
   .getElementById("customMovieForm")
   .addEventListener("submit", async function (event) {
-    submit.disabled = true;
+    movieSubmit.disabled = true;
     setTimeout(function () {
-      submit.disabled = false;
+      movieSubmit.disabled = false;
     }, 3500);
     event.preventDefault();
 
@@ -88,9 +88,9 @@ const storySubmit = document.getElementById("storySubmit");
 document
   .getElementById("storyForm")
   .addEventListener("submit", async function (event) {
-    submit.disabled = true;
+    storySubmit.disabled = true;
     setTimeout(function () {
-      submit.disabled = false;
+      storySubmit.disabled = false;
     }, 3500);
     event.preventDefault();
 
@@ -109,9 +109,8 @@ document
 
       // EXPLAIN THIS!!!!
       const data = await response.json();
-      document.getElementById(
-        "storyResult"
-      ).innerHTML = `<p>${data.message}</p>`;
+
+      document.getElementById("storyResult").innerHTML = `<p>${data}</p>`;
     } catch (error) {
       console.error("error", error);
     }

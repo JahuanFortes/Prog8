@@ -102,11 +102,15 @@ const anthropic = new Anthropic({
 
 const storyMSG = [];
 app.post("/story", async (req, res) => {
-  const { storyPrompt } = req.body;
-  // if (!storyPrompt) {
-  //   res.send({ message: "no story found" });
-  // }
-  storyMSG.push({ role: "user", content: storyPrompt });
+  storyMSG.push({
+    role: "user",
+    content: [
+      {
+        type: "text",
+        text: req.body.storyPrompt,
+      },
+    ],
+  });
   console.log(storyMSG);
 
   const msg = await anthropic.messages.create({
