@@ -1,6 +1,5 @@
 // #region Get
 const makePlanner = document.getElementById("makePlanner");
-
 makePlanner.addEventListener("click", async function (event) {
   makePlanner.disabled = true;
   setTimeout(function () {
@@ -116,6 +115,5 @@ document
     } catch (error) {
       console.error("error", error);
     }
-    console.log(data.content);
   });
 // #endregion

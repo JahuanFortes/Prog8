@@ -1,0 +1,29 @@
+# Prog 8 Machine Learning in Javascript
+
+## Instalation
+
+To install my project you need to clone the repository.
+After you did that you need to go to the terminal and cd->server.
+
+```bash
+cd/Prog8/Server
+```
+
+When you are in the server folder you then need to download all the packages with npm.
+
+```bash
+npm install
+```
+
+## Usage
+
+Go back to the terminal and type this line below to start the server/
+
+```bash
+node --env-file=.env server.js
+```
+
+## What's Missing?
+
+- CSS
+- Server is only local and since you shouldn't upload an .env file it won't work
